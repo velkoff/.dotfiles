@@ -1,0 +1,53 @@
+/*
+    Emacs/readline additions to the Cocoa text system
+   ~/Library/KeyBindings/DefaultKeyBinding.dict
+
+    Key Modifiers 
+    -------------
+    ^ : Ctrl 
+    $ : Shift 
+    ~ : Option (Alt) 
+    @ : Command (Apple) 
+    # : Numeric Keypad 
+     
+    Non-Printable Key Codes 
+    -----------------------
+    Up Arrow:     \UF700        Backspace:    \U0008        F1:           \UF704 
+    Down Arrow:   \UF701        Tab:          \U0009        F2:           \UF705 
+    Left Arrow:   \UF702        Escape:       \U001B        F3:           \UF706 
+    Right Arrow:  \UF703        Enter:        \U000A        ... 
+    Insert:       \UF727        Page Up:      \UF72C 
+    Delete:       \UF728        Page Down:    \UF72D 
+    Home:         \UF729        Print Screen: \UF72E 
+    End:          \UF72B        Scroll Lock:  \UF72F 
+    Break:        \UF732        Pause:        \UF730 
+    SysReq:       \UF731        Menu:         \UF735 
+    Help:         \UF746 
+*/
+
+{
+    "^a"      = "moveToBeginningOfLine:";              /* C-a          Move to beginning of line            */   
+    "^e"      = "moveToEndOfLine:";                    /* C-e          Move to end of line                  */
+    "~f"      = "moveWordForward:";                    /* M-f          Move word forward                    */
+    "~F"      = "moveWordForwardAndModifySelection:";  /* M-f          Move word forward with selection     */
+    "~b"      = "moveWordBackward:";                   /* M-b          Move word back                       */
+    "~B"      = "moveWordBackwardAndModifySelection:"; /* M-f          Move word back with selection        */
+    "~d"      = "deleteWordForward:";                  /* M-d          Delete word forward                  */
+    "~w"      = "deleteWordBackward:";                 /* M-h          Delete word backwrad                 */
+    "^w"      = "deleteToBeginningOfLine:";            /* C-w          Delete word to begnning of line      */
+    "^/"      = "undo:";                               /* C-/          Undo                                 */
+
+    "^t"      = "transpose:";                          /* C-t          Transpose                            */
+    "~t"      = "transposeWords:";                     /* M-t          Transpose words                      */
+
+    "~v"      = "pageUp:";                             /* M-v          Move page up                         */
+    "^v"      = "pageDown:";                           /* C-v          Move page down                       */
+    "~<"      = "moveToBeginningOfDocument:";          /* M-<          Move to the beginning of document    */
+    "~>"      = "moveToEndOfDocument:";                /* M->          Move to the end of document          */
+    "^l"      = "centerSelectionInVisibleArea:";       /* C-l           Recenter                            */
+
+    "~{"      = "moveToBeginningOfParagraph:";        /* M-{           Move to the beginning of paragraph   */
+    "~}"      = "moveToEndOfParagraph:";              /* M-}           Move to the end of paragraph         */
+    "^u"      = "deleteToBeginningOfParagraph:";      /* C-u           Delete to the beginnign of paragraph */ 
+    "~h"      = "selectParagraph:";                   /* M-u           Selecte Paragraph                    */
+}
