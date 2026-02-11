@@ -1,0 +1,187 @@
+{
+    "title": "Change caps_lock to Esc and Control",
+    "rules": [
+        {
+            "description": "escape if left_control is pressed alone.",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_control",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_control",
+                            "lazy": true
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "escape"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "caps_lock to control if pressed w/ delay",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "caps_lock",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_control",
+                            "lazy": true
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "escape"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "semicolon -> right_option if pressed w/ delay",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "semicolon",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_option",
+                            "lazy": true
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "semicolon"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "semicolon -> right_control if pressed w/ delay",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "semicolon",
+                        "modifiers": {
+                            "mandatory": ["any"],
+                            "optional": ["any"]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_control",
+                            "lazy": true
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "semicolon"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "quote -> right_option if pressed w/ delay",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "quote",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_option",
+                            "lazy": true
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "quote"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "right_command -> enter",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "keypad_enter"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "right_command -> return_or_enter, right_control if pressed w/ delay",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_control",
+                            "lazy": true
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "return_or_enter"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
