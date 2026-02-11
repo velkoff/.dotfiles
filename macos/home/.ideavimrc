@@ -1,0 +1,93 @@
+set ignorecase
+set smartcase
+set incsearch
+set number
+set relativenumber
+set scrolloff=3
+set nohlsearch
+set clipboard+=unnamed
+
+" Emacs keybindings in insert mode
+inoremap <M-f> <S-Right>
+inoremap <M-b> <S-Left>
+inoremap <M-d> <S-Right><C-W>
+inoremap <M-w> <C-W>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+
+" Center the cursor when moving 1/2 page up/down
+" map <C-u> <C-u>zz
+" map <C-d> <C-d>zz
+
+" Center offset
+nnoremap zz zz4<c-e>
+
+" Delete w/ black-hole
+nnoremap x "_x
+vnoremap x "_d
+" nnoremap d "_d
+" Paste over visual selection without losing the yanked text
+" vnoremap p "_dP
+
+" Indent keybindings
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" IdeaVim Plugins
+set ideajoin
+set highlightedyank
+set surround
+
+let mapleader=" "
+
+" Navigate paragraphs
+nnoremap J }
+vnoremap J }
+nnoremap K {
+vnoremap K {
+
+" Navigate start/end line
+nnoremap H ^
+vnoremap H ^
+nnoremap L $
+vnoremap L $
+map M %
+
+nnoremap gj +
+vnoremap gj +
+nnoremap gk -
+vnoremap gk -
+
+" Navigate camel humps
+" nnoremap L [w
+" vnoremap L [w
+" nnoremap H [b
+" vnoremap H [b
+
+" IdeaVim Actions
+" https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
+
+" nmap gd <Action>(QuickJavaDoc)
+" nmap gi <Action>(QuickImplementations)
+" nmap ge <Action>(ShowErrorDescription)
+" nmap gc <Action>(EditorContextInfo)
+
+nmap <leader>d <Action>(QuickJavaDoc)
+nmap <leader>i <Action>(QuickImplementations)
+nmap <leader>e <Action>(ShowErrorDescription)
+nmap <leader>p <Action>(ParameterInfo)
+nmap <leader>c <Action>(EditorContextInfo)
+nmap <leader>a <Action>(Annotate)
+nmap <leader>u <Action>(FindUsages)
+nmap <leader>v <Action>(Vcs.QuickListPopupAction)
+" nmap <leader>s p<Action>(ShowUsages)
+map <leader>s <Action>(Vcs.ShowHistoryForBlock)
+map <leader>r <Action>(RenameElement)
+map <leader>l <Action>(ReformatCode)

@@ -1,0 +1,75 @@
+{
+	"workbench.startupEditor": "none",
+	"workbench.editor.tabSizing": "fixed",
+	"editor.minimap.enabled": false,
+	"editor.fontSize": 14,
+	"editor.fontFamily": "Iosevka",
+    // "editor.fontFamily": "PragmataPro Liga",
+	"editor.fontLigatures": true,
+	"editor.cursorBlinking": "solid",
+	"editor.lineNumbers": "relative",
+	"window.commandCenter": true,
+	"files.autoSave": "onWindowChange",
+
+	"[markdown]": {
+		"editor.fontFamily": "iA Writer Mono S",
+		// "editor.fontFamily": "Dank Mono",
+		// "editor.fontFamily": "Comic Sans MS",
+		"editor.fontSize": 15,
+		"editor.fontLigatures": true,
+		"editor.unicodeHighlight.ambiguousCharacters": true,
+		"editor.unicodeHighlight.invisibleCharacters": true,
+		"editor.wordWrap": "wordWrapColumn",
+		"editor.wordWrapColumn": 120,
+		"editor.quickSuggestions": {
+			"comments": "off",
+			"strings": "off",
+			"other": "off"
+		},
+		"editor.suggestOnTriggerCharacters": false
+	},
+	"markdown.preview.fontFamily": "Iosevka Aile",
+	"markdown.preview.fontSize": 14.5,
+	"markdown.preview.breaks": true,
+	"markdown.preview.openMarkdownLinks": "inEditor",
+	"vim.highlightedyank.enable": true,
+	"vim.incsearch": true,
+	"vim.useSystemClipboard": true,
+	"vim.leader": "<space>",
+	"vim.useCtrlKeys": true,
+	"extensions.experimental.affinity": {
+		"vscodevim.vim": 1,
+		"asvetliakov.vscode-neovim": 1
+	},
+
+	"vim.normalModeKeyBindings": [
+		// Navigation
+		{ "before": ["J"], "after": ["}"] },
+		{ "before": ["K"], "after": ["{"] },
+		{ "before": ["H"], "after": ["_"] }, 
+		{ "before": ["L"], "after": ["$"] }, 
+		{ "before": ["M"], "after": ["%"] }, 
+		
+		// Navigate visual lines rather than logical ones with `j` and `k`
+		{ "before": ["j"], "after": ["g", "j"] },
+		{ "before": ["k"], "after": ["g", "k"] },
+
+		// Editor actions
+		{ "before": ["<leader>", "e"], "commands": ["workbench.action.toggleSidebarVisibility"] },
+		{ "before": ["<leader>", "u"], "commands": ["editor.action.referenceSearch.trigger"] }
+	],
+	"vim.visualModeKeyBindings": [
+		// Navigation
+		{ "before": ["J"], "after": ["}"] }, 
+		{ "before": ["K"], "after": ["{"] }, 
+		{ "before": ["H"], "after": ["_"] }, 
+		{ "before": ["L"], "after": ["$"] }, 
+		{ "before": ["M"], "after": ["%"] },
+
+		// Navigate visual lines rather than logical ones with `j` and `k`
+		{ "before": ["j"], "after": ["g", "j"] },
+		{ "before": ["k"], "after": ["g", "k"] },
+	],
+
+	"workbench.colorTheme": "Default Light Modern"
+}
