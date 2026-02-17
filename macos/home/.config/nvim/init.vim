@@ -20,11 +20,14 @@
 :filetype plugin on
 
 call plug#begin()
-    Plug 'tpope/vim-surround'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
-	Plug 'preservim/nerdtree'
-	Plug 'Yohannfra/Nvim-Switch-Buffer'
     Plug 'nvim-lua/plenary.nvim'
+	Plug 'preservim/nerdtree'
+    Plug 'nvim-telescope/telescope.nvim' 
+    Plug 'tpope/vim-surround'
+
+    Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'romgrk/barbar.nvim'
 
 	Plug 'phha/zenburn.nvim'
 	Plug 'rose-pine/neovim'
@@ -32,6 +35,7 @@ call plug#end()
 
 colorscheme zenburn
 " colorscheme rose-pine
+" colorscheme rose-pine-moon
 
 let mapleader = " "
 
@@ -55,8 +59,9 @@ nnoremap L $
 vnoremap L $
 map M %
 
-" d/x/r useing the black hole register
+" d/x/r using the black hole register
 nnoremap x "_x
+xnoremap x "_x
 " nnoremap d "_d
 " nnoremap r "_r
 
@@ -78,17 +83,22 @@ inoremap <C-a> <Home>
 inoremap <C-e> <End>
 
 " Find files using Telescope command-line sugar
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>sf <cmd>Telescope find_files<cr>
+nnoremap <leader>sg <cmd>Telescope live_grep<cr>
+nnoremap <leader><leader> <cmd>Telescope buffers<cr>
+nnoremap <leader>sh <cmd>Telescope help_tags<cr>
 
 " NERDTree
 map <leader>e :NERDTreeToggle<CR>
 
-" Nvim-Switch-Buffer
-nnoremap <leader>b :SwitchBuffer <cr>
+" barbar
 set switchbuf=usetab
+" Move to previous/next tab
+nnoremap <silent> <A-,> <Cmd>BufferPrevious<CR>
+nnoremap <silent> <A-.> <Cmd>BufferNext<CR>
+" Re-order to previous/next tab
+nnoremap <silent> <A-S-,> <Cmd>BufferMovePrevious<CR>
+nnoremap <silent> <A-S-.> <Cmd>BufferMoveNext<CR>
 
 au TextYankPost * silent! lua vim.highlight.on_yank()
 
