@@ -26,28 +26,30 @@
 */
 
 {
-    "^a"      = "moveToBeginningOfLine:";              /* C-a          Move to beginning of line            */   
-    "^e"      = "moveToEndOfLine:";                    /* C-e          Move to end of line                  */
-    "~f"      = "moveWordForward:";                    /* M-f          Move word forward                    */
-    "~F"      = "moveWordForwardAndModifySelection:";  /* M-f          Move word forward with selection     */
-    "~b"      = "moveWordBackward:";                   /* M-b          Move word back                       */
-    "~B"      = "moveWordBackwardAndModifySelection:"; /* M-f          Move word back with selection        */
-    "~d"      = "deleteWordForward:";                  /* M-d          Delete word forward                  */
-    "~w"      = "deleteWordBackward:";                 /* M-h          Delete word backwrad                 */
-    "^w"      = "deleteToBeginningOfLine:";            /* C-w          Delete word to begnning of line      */
-    "^/"      = "undo:";                               /* C-/          Undo                                 */
+    "^a"      = "moveToBeginningOfLine:";                     /* C-a          Move to beginning of line            */   
+    "^$a"     = "moveToBeginningOfLineAndModifySelection:";   /* C-S-a        Select to beginning of line          */
+    "^e"      = "moveToEndOfLine:";                           /* C-e          Move to end of line                  */
+    "^$e"     = "moveToEndOfLineAndModifySelection";          /* C-S-e        Select to end of line                */
+    "~f"      = "moveWordForward:";                           /* M-f          Move word forward                    */
+    "~F"      = "moveWordForwardAndModifySelection:";         /* M-F          Move word forward with selection     */
+    "~b"      = "moveWordBackward:";                          /* M-b          Move word back                       */
+    "~B"      = "moveWordBackwardAndModifySelection:";        /* M-B          Move word back with selection        */
+    "~d"      = "deleteWordForward:";                         /* M-d          Delete word forward                  */
+    "~w"      = "deleteWordBackward:";                        /* M-w          Delete word backward                 */
+    "^w"      = "deleteToBeginningOfLine:";                   /* C-w          Delete word to beginning of line     */
+    "^/"      = "undo:";                                      /* C-/          Undo                                 */
 
-    "^t"      = "transpose:";                          /* C-t          Transpose                            */
-    "~t"      = "transposeWords:";                     /* M-t          Transpose words                      */
+    "^t"      = "transpose:";                                 /* C-t          Transpose                            */
+    "~t"      = "transposeWords:";                            /* M-t          Transpose words                      */
 
-    "~v"      = "pageUp:";                             /* M-v          Move page up                         */
-    "^v"      = "pageDown:";                           /* C-v          Move page down                       */
-    "~<"      = "moveToBeginningOfDocument:";          /* M-<          Move to the beginning of document    */
-    "~>"      = "moveToEndOfDocument:";                /* M->          Move to the end of document          */
-    "^l"      = "centerSelectionInVisibleArea:";       /* C-l           Recenter                            */
+    "~v"      = "pageUp:";                                    /* M-v          Move page up                         */
+    "^v"      = "pageDown:";                                  /* C-v          Move page down                       */
+    "~<"      = "moveToBeginningOfDocument:";                 /* M-<          Move to the beginning of document    */
+    "~>"      = "moveToEndOfDocument:";                       /* M->          Move to the end of document          */
+    "^l"      = "centerSelectionInVisibleArea:";              /* C-l          Recenter                             */
 
-    "~{"      = "moveToBeginningOfParagraph:";        /* M-{           Move to the beginning of paragraph   */
-    "~}"      = "moveToEndOfParagraph:";              /* M-}           Move to the end of paragraph         */
-    "^u"      = "deleteToBeginningOfParagraph:";      /* C-u           Delete to the beginnign of paragraph */ 
-    "~h"      = "selectParagraph:";                   /* M-u           Selecte Paragraph                    */
+    "~{"      = "moveToBeginningOfParagraph:";               /* M-{           Move to the beginning of paragraph   */
+    "~}"      = "moveToEndOfParagraph:";                     /* M-}           Move to the end of paragraph         */
+    "^u"      = "deleteToBeginningOfParagraph:";             /* C-u           Delete to the beginnign of paragraph */ 
+    "~h"      = "selectParagraph:";                          /* M-h           Select paragraph                     */
 }
