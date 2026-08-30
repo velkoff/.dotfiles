@@ -35,17 +35,6 @@
     }
   },
 
-  // Emacs bindings outside vim mode and editor-wide
-  {
-    "context": "Editor && !vim_mode",
-    "bindings": {
-      "alt-f": "editor::MoveToNextWordEnd",
-      "alt-b": "editor::MoveToPreviousWordStart",
-      "alt-w": "editor::DeleteToPreviousWordStart",
-      "alt-d": "editor::DeleteToNextWordEnd"
-    }
-  },
-
   // Split behavior
   {
     "bindings": {
@@ -77,14 +66,29 @@
     // Emacs bindings in insert mode
     "context": "Editor && vim_mode == insert",
     "bindings": {
-      "alt-w": "editor::DeleteToPreviousWordStart",
-      "alt-d": "editor::DeleteToNextWordEnd",
+      "ctrl-b": "editor::MoveLeft",
+      "ctrl-f": "editor::MoveRight",
       "alt-f": "editor::MoveToNextWordEnd",
       "alt-b": "editor::MoveToPreviousWordStart",
-    },
+      "ctrl-a": [
+        "editor::MoveToBeginningOfLine",
+        {
+          "stop_at_soft_wraps": false,
+          "stop_at_indent": false
+        }
+      ],
+      "ctrl-e": [
+        "editor::MoveToEndOfLine",
+        {
+          "stop_at_soft_wraps": false
+        }
+      ],
+      "alt-d": "editor::DeleteToNextWordEnd",
+      "alt-w": "editor::DeleteToPreviousWordStart",
+    }
   },
   {
-    // Navigation
+    // Editor navigation
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !menu",
     "bindings": {
       "shift-j": ["workspace::SendKeystrokes", "}"],
@@ -95,20 +99,19 @@
       "j": ["workspace::SendKeystrokes", "g j"],
       "k": ["workspace::SendKeystrokes", "g k"],
 
-      // UI bindings
-      "space e": "workspace::ToggleLeftDock",
+      "] e": "editor::GoToDiagnostic",
+      "[ e": "editor::GoToPreviousDiagnostic",
+      "space e": "editor::Hover",
       "space u": "editor::FindAllReferences",
 
-      // Fold/unfold
+      "space f": "file_finder::Toggle",
+      "space g": "text_finder::Toggle",
+      "space p": "command_palette::Toggle",
+      "space space": "workspace::ToggleLeftDock",
+
       "alt--": "editor::Fold",
       "alt-=": "editor::UnfoldLines",
-
-      // Join lines
-      "alt-l": "editor::JoinLines",
-
-      // Match behavior re: auto-close
-      // "n": ["workspace::SendKeystrokes", "n escape"],
-      // "N": ["workspace::SendKeystrokes", "shift-n escape"]
-    },
+      "alt-l": "editor::JoinLines"
+    }
   }
 ]
