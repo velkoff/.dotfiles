@@ -1,0 +1,114 @@
+[
+  // Expand behavior (incremental/decremental)
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-k": "editor::SelectLargerSyntaxNode",
+      "alt-j": "editor::SelectSmallerSyntaxNode",
+      "cmd-o": "outline::Toggle",
+    },
+  },
+
+  // Move tabs
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-alt-left": "pane::SwapItemLeft",
+      "cmd-alt-right": "pane::SwapItemRight"
+    }
+  },
+
+  // Search beahavior re: auto-close
+  {
+     "context": "BufferSearchBar",
+     "bindings": {
+       "enter": ["workspace::SendKeystrokes", "enter escape"]
+     }
+   },
+
+  // Set font size (global)
+  {
+    "bindings": {
+      "ctrl->": "zed::IncreaseBufferFontSize",
+      "ctrl-<": "zed::DecreaseBufferFontSize",
+      "ctrl-)": "zed::ResetBufferFontSize"
+    }
+  },
+
+  // Emacs bindings outside vim mode and editor-wide
+  {
+    "context": "Editor && !vim_mode",
+    "bindings": {
+      "alt-f": "editor::MoveToNextWordEnd",
+      "alt-b": "editor::MoveToPreviousWordStart",
+      "alt-w": "editor::DeleteToPreviousWordStart",
+      "alt-d": "editor::DeleteToNextWordEnd"
+    }
+  },
+
+  // Split behavior
+  {
+    "bindings": {
+      "alt-tab": "workspace::ActivateNextPane",
+      "alt-enter": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-s l": "pane::SplitRight",
+      "cmd-shift-s j": "pane::SplitDown",
+      "alt-]": "workspace::ActivateNextPane",
+      "alt-[": "workspace::ActivatePreviousPane",
+    },
+  },
+
+  // Markdown preview
+  {
+    "context": "Editor && extension == md",
+    "bindings": {
+      "cmd-r": "markdown::OpenPreview",
+      "cmd-k v": "markdown::OpenPreviewToTheSide",
+    },
+  },
+
+  // Vim
+  {
+    // Emacs bindings in insert mode
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "alt-w": "editor::DeleteToPreviousWordStart",
+      "alt-d": "editor::DeleteToNextWordEnd",
+      "alt-f": "editor::MoveToNextWordEnd",
+      "alt-b": "editor::MoveToPreviousWordStart",
+    },
+  },
+  {
+    // Navigation
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !menu",
+    "bindings": {
+      "shift-j": ["workspace::SendKeystrokes", "}"],
+      "shift-k": ["workspace::SendKeystrokes", "{"],
+      "shift-h": ["workspace::SendKeystrokes", "_"],
+      "shift-l": ["workspace::SendKeystrokes", "$"],
+      "shift-m": ["workspace::SendKeystrokes", "%"],
+      "j": ["workspace::SendKeystrokes", "g j"],
+      "k": ["workspace::SendKeystrokes", "g k"],
+
+      // UI bindings
+      "space e": "workspace::ToggleLeftDock",
+      "space u": "editor::FindAllReferences",
+
+      // Fold/unfold
+      "alt--": "editor::Fold",
+      "alt-=": "editor::UnfoldLines",
+
+      // Join lines
+      "alt-l": "editor::JoinLines",
+
+      // Match behavior re: auto-close
+      // "n": ["workspace::SendKeystrokes", "n escape"],
+      // "N": ["workspace::SendKeystrokes", "shift-n escape"]
+    },
+  }
+]
