@@ -2,54 +2,64 @@
     Emacs/readline additions to the Cocoa text system
    ~/Library/KeyBindings/DefaultKeyBinding.dict
 
-    Key Modifiers 
+    Key Modifiers
     -------------
-    ^ : Ctrl 
-    $ : Shift 
-    ~ : Option (Alt) 
-    @ : Command (Apple) 
-    # : Numeric Keypad 
-     
-    Non-Printable Key Codes 
+    ^ : Ctrl
+    $ : Shift
+    ~ : Option (Alt)
+    @ : Command (Apple)
+    # : Numeric Keypad
+
+    Non-Printable Key Codes
     -----------------------
-    Up Arrow:     \UF700        Backspace:    \U0008        F1:           \UF704 
-    Down Arrow:   \UF701        Tab:          \U0009        F2:           \UF705 
-    Left Arrow:   \UF702        Escape:       \U001B        F3:           \UF706 
-    Right Arrow:  \UF703        Enter:        \U000A        ... 
-    Insert:       \UF727        Page Up:      \UF72C 
-    Delete:       \UF728        Page Down:    \UF72D 
-    Home:         \UF729        Print Screen: \UF72E 
-    End:          \UF72B        Scroll Lock:  \UF72F 
-    Break:        \UF732        Pause:        \UF730 
-    SysReq:       \UF731        Menu:         \UF735 
-    Help:         \UF746 
+    Up Arrow:     \UF700        Backspace:    \U0008        F1:           \UF704
+    Down Arrow:   \UF701        Tab:          \U0009        F2:           \UF705
+    Left Arrow:   \UF702        Escape:       \U001B        F3:           \UF706
+    Right Arrow:  \UF703        Enter:        \U000A        ...
+    Insert:       \UF727        Page Up:      \UF72C
+    Delete:       \UF728        Page Down:    \UF72D
+    Home:         \UF729        Print Screen: \UF72E
+    End:          \UF72B        Scroll Lock:  \UF72F
+    Break:        \UF732        Pause:        \UF730
+    SysReq:       \UF731        Menu:         \UF735
+    Help:         \UF746
 */
 
 {
-    "^a"      = "moveToBeginningOfLine:";                     /* C-a          Move to beginning of line            */   
-    "^$a"     = "moveToBeginningOfLineAndModifySelection:";   /* C-S-a        Select to beginning of line          */
-    "^e"      = "moveToEndOfLine:";                           /* C-e          Move to end of line                  */
-    "^$e"     = "moveToEndOfLineAndModifySelection";          /* C-S-e        Select to end of line                */
-    "~f"      = "moveWordForward:";                           /* M-f          Move word forward                    */
-    "~F"      = "moveWordForwardAndModifySelection:";         /* M-F          Move word forward with selection     */
-    "~b"      = "moveWordBackward:";                          /* M-b          Move word back                       */
-    "~B"      = "moveWordBackwardAndModifySelection:";        /* M-B          Move word back with selection        */
-    "~d"      = "deleteWordForward:";                         /* M-d          Delete word forward                  */
-    "~w"      = "deleteWordBackward:";                        /* M-w          Delete word backward                 */
-    "^w"      = "deleteToBeginningOfLine:";                   /* C-w          Delete word to beginning of line     */
-    "^/"      = "undo:";                                      /* C-/          Undo                                 */
+    "^a"      = "moveToBeginningOfLine:";              /* C-a          Move to beginning of line            */
+    "^e"      = "moveToEndOfLine:";                    /* C-e          Move to end of line                  */
+    "~f"      = "moveWordForward:";                    /* M-f          Move word forward                    */
+    "~F"      = "moveWordForwardAndModifySelection:";  /* M-F          Move word forward with selection     */
+    "~b"      = "moveWordBackward:";                   /* M-b          Move word back                       */
+    "~B"      = "moveWordBackwardAndModifySelection:"; /* M-B          Move word back with selection        */
+    "~d"      = "deleteWordForward:";                  /* M-d          Delete word forward                  */
+    "~w"      = "deleteWordBackward:";                 /* M-w          Delete word backward                 */
+    "^w"      = "deleteToBeginningOfLine:";            /* C-w          Delete word to beginning of line     */
+    "^/"      = "undo:";                               /* C-/          Undo                                 */
 
-    "^t"      = "transpose:";                                 /* C-t          Transpose                            */
-    "~t"      = "transposeWords:";                            /* M-t          Transpose words                      */
+    "^t"      = "transpose:";                          /* C-t          Transpose                            */
+    "~t"      = "transposeWords:";                     /* M-t          Transpose words                      */
 
-    "~v"      = "pageUp:";                                    /* M-v          Move page up                         */
-    "^v"      = "pageDown:";                                  /* C-v          Move page down                       */
-    "~<"      = "moveToBeginningOfDocument:";                 /* M-<          Move to the beginning of document    */
-    "~>"      = "moveToEndOfDocument:";                       /* M->          Move to the end of document          */
-    "^l"      = "centerSelectionInVisibleArea:";              /* C-l          Recenter                             */
+    "~v"      = "pageUp:";                             /* M-v          Move page up                         */
+    "^v"      = "pageDown:";                           /* C-v          Move page down                       */
+    "~^p"      = "scrollLineUp:";                      /* M-C-p        Move viewport up                     */
+    "~^n"      = "scrollLineDown:";                    /* M-C-n        Move viewport down                   */
+    "^l"      = "centerSelectionInVisibleArea:";       /* C-l          Recenter                             */
+    "~<"      = "moveToBeginningOfDocument:";          /* M-<          Move to the beginning of document    */
+    "~>"      = "moveToEndOfDocument:";                /* M->          Move to the end of document          */
 
-    "~{"      = "moveToBeginningOfParagraph:";               /* M-{           Move to the beginning of paragraph   */
-    "~}"      = "moveToEndOfParagraph:";                     /* M-}           Move to the end of paragraph         */
-    "^u"      = "deleteToBeginningOfParagraph:";             /* C-u           Delete to the beginnign of paragraph */ 
-    "~h"      = "selectParagraph:";                          /* M-h           Select paragraph                     */
+    /* Vim-like paragraph movement */
+    "~{" = (
+        "moveToBeginningOfParagraph:",
+        "moveBackward:",
+        "moveToBeginningOfParagraph:"
+    );
+    "~}" = (
+        "moveToEndOfParagraph:",
+        "moveForward:",
+        "moveToEndOfParagraph:"
+    );
+
+    "^u"      = "deleteToBeginningOfParagraph:";       /* C-u          Delete to the beginnign of paragraph */
+    "~h"      = "selectParagraph:";                    /* M-h          Select paragraph                     */
 }
