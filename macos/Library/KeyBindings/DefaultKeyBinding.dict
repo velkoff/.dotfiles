@@ -42,24 +42,30 @@
 
     "~v"      = "pageUp:";                             /* M-v          Move page up                         */
     "^v"      = "pageDown:";                           /* C-v          Move page down                       */
-    "~^p"      = "scrollLineUp:";                      /* M-C-p        Move viewport up                     */
-    "~^n"      = "scrollLineDown:";                    /* M-C-n        Move viewport down                   */
+    "~^p"     = "scrollLineUp:";                       /* M-C-p        Move viewport up                     */
+    "~^n"     = "scrollLineDown:";                     /* M-C-n        Move viewport down                   */
     "^l"      = "centerSelectionInVisibleArea:";       /* C-l          Recenter                             */
     "~<"      = "moveToBeginningOfDocument:";          /* M-<          Move to the beginning of document    */
     "~>"      = "moveToEndOfDocument:";                /* M->          Move to the end of document          */
 
-    /* Vim-like paragraph movement */
-    "~{" = (
-        "moveToBeginningOfParagraph:",
-        "moveBackward:",
+    "^u"      = "deleteToBeginningOfParagraph:";       /* C-u          Delete to the beginnign of paragraph */
+    "~h"      = "selectParagraph:";                    /* M-h          Select paragraph                     */
+
+    /* Paragraphs movement (vim-like) */
+    "~^["     = "moveToBeginningOfParagraph:";         /* M-C-[        Move to beginning of paragraph       */
+    "~^]"     = "moveToEndOfParagraph:";               /* M-C-]        Move to end of paragraph             */
+    "^["      = (                                      /* C-[          Jump to previous paragraph           */
+        "moveToBeginningOfParagraph:", 
+        "moveBackward:", 
         "moveToBeginningOfParagraph:"
     );
-    "~}" = (
-        "moveToEndOfParagraph:",
-        "moveForward:",
+    "^]"      = (                                      /* C-]          Jump next to paragraph               */
+        "moveToEndOfParagraph:", 
+        "moveForward:", 
         "moveToEndOfParagraph:"
     );
 
-    "^u"      = "deleteToBeginningOfParagraph:";       /* C-u          Delete to the beginnign of paragraph */
-    "~h"      = "selectParagraph:";                    /* M-h          Select paragraph                     */
+    /* New line insertion (vim-like) */
+    "~^o"     = ("moveToEndOfLine:", "insertNewline:");
+    "~^O"     = ("moveToBeginningOfLine:", "insertNewline:", "moveUp:");
 }
