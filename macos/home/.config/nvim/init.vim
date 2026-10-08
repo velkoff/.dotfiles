@@ -16,7 +16,7 @@ set wrap
 set mouse=a
 set scrolloff=8
 set timeoutlen=400
-set background=light
+set background=dark
 set splitright
 set splitbelow
 
@@ -42,8 +42,8 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/mason.nvim' 
     Plug 'williamboman/mason-lspconfig.nvim'
-    Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'master' }
+    Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
     Plug 'windwp/nvim-ts-autotag' 
 
     Plug 'phha/zenburn.nvim'
@@ -53,12 +53,15 @@ call plug#begin()
 call plug#end()
 
 " colorscheme zenburn
+"
 " colorscheme rose-pine
 " colorscheme rose-pine-dawn
-" colorscheme rose-pine-moon
-colorscheme zenbones
-" colorscheme forestbones
+colorscheme rose-pine-moon
+"
+" colorscheme zenbones
+" colorscheme zenwritten
 " colorscheme zenburned
+" colorscheme forestbones
 
 let mapleader = "\<Space>"
 
@@ -150,7 +153,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local opts = { buffer = ev.buf }
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        -- vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', '<leader>u', vim.lsp.buf.references, opts)
         vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
         vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
@@ -172,45 +175,45 @@ cmp.setup({
     sources = cmp.config.sources({ { name = 'nvim_lsp' }, { name = 'luasnip' }, }, { { name = 'buffer' } }) 
 })
 
-require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'javascript', 'tsx', 'typescript', 'css', 'scss', 'html', 'lua', 'vim', 'vimdoc', 'markdown', 'markdown_inline' },
-    highlight = { enable = true },
-    indent = { enable = true },
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
-                ['aa'] = '@parameter.outer',
-                ['ia'] = '@parameter.inner',
-                ['a='] = '@assignment.outer',
-                ['i='] = '@assignment.inner',
-            }
-        },
-        move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = { [']m'] = '@function.outer' },
-            goto_previous_start = { ['[m'] = '@function.outer' },
-        },
-        lsp_interop = {
-            enable = true,
-            border = 'none',
-            peek_definition_code = { ['<leader>i'] = '@function.outer' }
-        }
-    },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = '<A-k>',
-            node_incremental = '<A-k>',
-            node_decremental = '<A-j>'
-        }
-    }
+require('nvim-treesitter').install({
+    'javascript', 'tsx', 'typescript', 'css', 'scss', 'html', 'lua', 'vim', 'vimdoc', 'markdown', 'markdown_inline'
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = {
+        'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
+        'css', 'scss', 'html', 'markdown', 'help'
+    },
+    callback = function()
+        vim.treesitter.start()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
+
+require('nvim-treesitter-textobjects').setup({
+    select = { lookahead = true },
+    move = { set_jumps = true },
+})
+
+local ts_select = require('nvim-treesitter-textobjects.select')
+local function select_textobject(query)
+    return function() ts_select.select_textobject(query, 'textobjects') end
+end
+vim.keymap.set({ 'x', 'o' }, 'af', select_textobject('@function.outer'))
+vim.keymap.set({ 'x', 'o' }, 'if', select_textobject('@function.inner'))
+vim.keymap.set({ 'x', 'o' }, 'ac', select_textobject('@class.outer'))
+vim.keymap.set({ 'x', 'o' }, 'ic', select_textobject('@class.inner'))
+vim.keymap.set({ 'x', 'o' }, 'aa', select_textobject('@parameter.outer'))
+vim.keymap.set({ 'x', 'o' }, 'ia', select_textobject('@parameter.inner'))
+vim.keymap.set({ 'x', 'o' }, 'a=', select_textobject('@assignment.outer'))
+vim.keymap.set({ 'x', 'o' }, 'i=', select_textobject('@assignment.inner'))
+
+local ts_move = require('nvim-treesitter-textobjects.move')
+vim.keymap.set({ 'n', 'x', 'o' }, ']m', function() ts_move.goto_next_start('@function.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[m', function() ts_move.goto_previous_start('@function.outer', 'textobjects') end)
+
+vim.keymap.set({ 'n', 'x' }, '<A-k>', function() vim.treesitter.select('parent', 1) end)
+vim.keymap.set('x', '<A-j>', function() vim.treesitter.select('child', 1) end)
+
 require('nvim-ts-autotag').setup()
 EOF
