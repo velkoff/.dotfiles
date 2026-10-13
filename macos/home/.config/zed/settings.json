@@ -1,57 +1,59 @@
 {
-  "cli_default_open_behavior": null,
-  "icon_theme": {
-    "mode": "light",
-    "light": "Zed (Default)",
-    "dark": "Zed (Default)"
-  },
-  "outline_panel": { "dock": "left" },
-  "collaboration_panel": { "dock": "left" },
-  "agent": {
-    "dock": "right",
-    "favorite_models": [],
-    "model_parameters": []
-  },
-  "git_panel": { "dock": "left" },
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "cursor_shape": "hollow",
-  "theme": {
-    "mode": "light",
-    "light": "JetBrains Islands Light",
-    "dark": "One Dark"
-  },
-  "base_keymap": "VSCode",
-  // "base_keymap": "JetBrains",
-  "vim_mode": true,
-  "relative_line_numbers": "enabled",
-  "buffer_font_family": "iA Writer Mono S",
-  // "buffer_font_family": "Iosevka",
-  // "buffer_font_family": "PragmataPro Liga",
-  // "buffer_font_family": ".ZedMono",
-  "text_rendering_mode": "grayscale",
-  "buffer_font_size": 12,
-  "buffer_line_height": "comfortable",
-  "ui_font_size": 12,
-  "confirm_quit": false,
-  "cursor_blink": false,
-  "wrap_guides": [80, 120],
-  "inlay_hints": { "enabled": false },
-  "project_panel": {
-    "dock": "left",
-    "indent_size": 10
-  },
-  "autosave": "on_window_change",
-  "format_on_save": "off",
-  "tab_size": 4,
-  "hard_tabs": false,
-  "languages": {
-    "Markdown": {
-      "indent_list_on_tab": true,
-      "preferred_line_length": 120,
-      "wrap_guides": [64, 72, 120],
+    "cli_default_open_behavior": "new_window",
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Zed (Default)",
+        "dark": "Zed (Default)"
+    },
+    "outline_panel": { "dock": "left" },
+    "collaboration_panel": { "dock": "left" },
+    "agent": {
+        "dock": "right",
+        "favorite_models": [],
+        "model_parameters": []
+    },
+    "git_panel": { "dock": "left" },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "cursor_shape": "hollow",
+    "theme": {
+        "mode": "dark",
+        "light": "Zen Light",
+        "dark": "Ayu Mirage"
+    },
+    "base_keymap": "VSCode",
+    // "base_keymap": "JetBrains",
+    "vim_mode": true,
+    "relative_line_numbers": "enabled",
+    "buffer_font_family": "Iosevka",
+    // "buffer_font_family": "iA Writer Mono S",
+    // "buffer_font_family": "Dank Mono",
+    // "buffer_font_family": "PragmataPro Liga",
+    // "buffer_font_family": "mononoki",
+    "text_rendering_mode": "grayscale",
+    "buffer_font_size": 14,
+    "buffer_line_height": "comfortable",
+    "ui_font_size": 13,
+    "confirm_quit": true,
+    "cursor_blink": false,
+    "wrap_guides": [80, 120],
+    "inlay_hints": { "enabled": false },
+    "project_panel": {
+        "dock": "left",
+        "indent_size": 10
+    },
+    "autosave": "on_window_change",
+    "format_on_save": "off",
+    "tab_size": 4,
+    "hard_tabs": false,
+    "languages": {
+        "Markdown": {
+            "indent_list_on_tab": true,
+            "soft_wrap": "bounded",
+            "preferred_line_length": 120,
+            "wrap_guides": [64, 72, 120],
+        }
     }
-  }
 }

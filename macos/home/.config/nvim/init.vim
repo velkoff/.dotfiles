@@ -19,17 +19,24 @@ set timeoutlen=400
 set background=dark
 set splitright
 set splitbelow
+set colorcolumn=+1
 
 filetype plugin indent on
 
 call plug#begin()
-    Plug 'nvim-lua/plenary.nvim'
     Plug 'preservim/nerdtree'
-    Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'nvim-lua/plenary.nvim'
+
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
     Plug 'nvim-mini/mini.pairs'
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-sleuth'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'petertriho/nvim-scrollbar'
+
+    Plug 'nvim-tree/nvim-web-devicons'
     Plug 'romgrk/barbar.nvim'
 
     Plug 'hrsh7th/nvim-cmp'
@@ -38,30 +45,33 @@ call plug#begin()
     Plug 'L3MON4D3/LuaSnip'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'rafamadriz/friendly-snippets'
-
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/mason.nvim' 
     Plug 'williamboman/mason-lspconfig.nvim'
+
     Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
     Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
+    Plug 'nvim-treesitter/nvim-treesitter-context' 
+
     Plug 'windwp/nvim-ts-autotag' 
 
     Plug 'phha/zenburn.nvim'
     Plug 'rose-pine/neovim'
     Plug 'rktjmp/lush.nvim'
     Plug 'zenbones-theme/zenbones.nvim'
+    Plug 'shatur/neovim-ayu'
 call plug#end()
 
 " colorscheme zenburn
-"
 " colorscheme rose-pine
 " colorscheme rose-pine-dawn
-colorscheme rose-pine-moon
-"
+" colorscheme rose-pine-moon
 " colorscheme zenbones
-" colorscheme zenwritten
-" colorscheme zenburned
+ "colorscheme zenwritten
+ "colorscheme zenburned
 " colorscheme forestbones
+" colorscheme zenwritten
+colorscheme ayu-mirage
 
 let mapleader = "\<Space>"
 
@@ -108,6 +118,10 @@ inoremap <S-Tab> <C-D>
 xnoremap <Tab> >gv
 xnoremap <S-Tab> <gv
 
+ " Join lines
+ nnoremap <A-l> J
+ xnoremap <A-l> J
+
 " Telescope
 nnoremap <leader>sf <cmd>Telescope find_files<cr>
 nnoremap <leader>sg <cmd>Telescope live_grep<cr>
@@ -121,7 +135,6 @@ nnoremap <leader>e :NERDTreeToggle<CR>
 
 " barbar
 set switchbuf=usetab
-
 " Move to previous/next tab
 nnoremap <silent> <A-,> <Cmd>BufferPrevious<CR>
 nnoremap <silent> <A-.> <Cmd>BufferNext<CR>
@@ -145,6 +158,22 @@ require('telescope').setup{
 
 require('telescope').load_extension('fzf')
 require('mini.pairs').setup()
+require("scrollbar").setup({
+    handle = {
+        text = " ",
+        blend = 50,
+        color = 'yellow',
+    },
+    marks = {
+        Cursor = {
+            text = " "
+        },
+    }
+})
+require("ibl").setup({
+    indent = { char = "│", highlight = "IblIndent" },
+    scope = { enabled = false }
+})
 
 require('mason').setup()
 require('mason-lspconfig').setup()
