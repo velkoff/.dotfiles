@@ -71,6 +71,8 @@ call plug#end()
  "colorscheme zenburned
 " colorscheme forestbones
 " colorscheme zenwritten
+
+autocmd ColorScheme ayu-mirage highlight LineNr guifg=#555f72
 colorscheme ayu-mirage
 
 let mapleader = "\<Space>"
@@ -144,6 +146,8 @@ nnoremap <silent> <A-S-.> <Cmd>BufferMoveNext<CR>
 
 au TextYankPost * silent! lua vim.highlight.on_yank()
 
+" -------------------------------------------------------------------------- "
+ 
 lua << EOF
 require('telescope').setup{
   extensions = {
@@ -159,16 +163,8 @@ require('telescope').setup{
 require('telescope').load_extension('fzf')
 require('mini.pairs').setup()
 require("scrollbar").setup({
-    handle = {
-        text = " ",
-        blend = 50,
-        color = 'yellow',
-    },
-    marks = {
-        Cursor = {
-            text = " "
-        },
-    }
+    handle = { text = " ", blend = 50, color = 'yellow' },
+    marks = { Cursor = { text = " " } }
 })
 require("ibl").setup({
     indent = { char = "│", highlight = "IblIndent" },
