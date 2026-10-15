@@ -60,6 +60,7 @@ call plug#begin()
     Plug 'rktjmp/lush.nvim'
     Plug 'zenbones-theme/zenbones.nvim'
     Plug 'shatur/neovim-ayu'
+    Plug 'nickkadutskyi/jb.nvim'
 call plug#end()
 
 " colorscheme zenburn
@@ -71,6 +72,7 @@ call plug#end()
  "colorscheme zenburned
 " colorscheme forestbones
 " colorscheme zenwritten
+" colorscheme jb
 
 autocmd ColorScheme ayu-mirage highlight LineNr guifg=#555f72
 colorscheme ayu-mirage
@@ -224,19 +226,55 @@ local ts_select = require('nvim-treesitter-textobjects.select')
 local function select_textobject(query)
     return function() ts_select.select_textobject(query, 'textobjects') end
 end
+-- Call
+vim.keymap.set({ 'x', 'o' }, 'ac', select_textobject('@call.outer'))
+vim.keymap.set({ 'x', 'o' }, 'ic', select_textobject('@call.inner'))
+-- Function
 vim.keymap.set({ 'x', 'o' }, 'af', select_textobject('@function.outer'))
 vim.keymap.set({ 'x', 'o' }, 'if', select_textobject('@function.inner'))
-vim.keymap.set({ 'x', 'o' }, 'ac', select_textobject('@class.outer'))
-vim.keymap.set({ 'x', 'o' }, 'ic', select_textobject('@class.inner'))
+-- Parameter
 vim.keymap.set({ 'x', 'o' }, 'aa', select_textobject('@parameter.outer'))
 vim.keymap.set({ 'x', 'o' }, 'ia', select_textobject('@parameter.inner'))
+-- Conditional
+vim.keymap.set({ 'x', 'o' }, 'ai', select_textobject('@conditional.outer'))
+vim.keymap.set({ 'x', 'o' }, 'ii', select_textobject('@conditional.inner'))
+-- Assignment
 vim.keymap.set({ 'x', 'o' }, 'a=', select_textobject('@assignment.outer'))
 vim.keymap.set({ 'x', 'o' }, 'i=', select_textobject('@assignment.inner'))
+-- Class
+-- vim.keymap.set({ 'x', 'o' }, 'ac', select_textobject('@class.outer'))
+-- vim.keymap.set({ 'x', 'o' }, 'ic', select_textobject('@class.inner'))
 
 local ts_move = require('nvim-treesitter-textobjects.move')
+-- Call
+vim.keymap.set({ 'n', 'x', 'o' }, ']c', function() ts_move.goto_next_start('@call.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[c', function() ts_move.goto_previous_start('@call.outer', 'textobjects') end)
+-- Function
 vim.keymap.set({ 'n', 'x', 'o' }, ']m', function() ts_move.goto_next_start('@function.outer', 'textobjects') end)
 vim.keymap.set({ 'n', 'x', 'o' }, '[m', function() ts_move.goto_previous_start('@function.outer', 'textobjects') end)
+-- Conditional
+vim.keymap.set({ 'n', 'x', 'o' }, ']i', function() ts_move.goto_next_start('@conditional.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[i', function() ts_move.goto_previous_start('@conditional.outer', 'textobjects') end)
+-- Block
+vim.keymap.set({ 'n', 'x', 'o' }, ']b', function() ts_move.goto_next_start('@block.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[b', function() ts_move.goto_previous_start('@block.outer', 'textobjects') end)
+-- Statement
+vim.keymap.set({ 'n', 'x', 'o' }, ']s', function() ts_move.goto_next_start('@statement.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[s', function() ts_move.goto_previous_start('@statement.outer', 'textobjects') end)
+-- Class
+-- vim.keymap.set({ 'n', 'x', 'o' }, ']c', function() ts_move.goto_next_start('@class.outer', 'textobjects') end)
+-- vim.keymap.set({ 'n', 'x', 'o' }, '[c', function() ts_move.goto_previous_start('@class.outer', 'textobjects') end)
 
+-- Repeat movements
+local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+
+-- Incremental selection
 vim.keymap.set({ 'n', 'x' }, '<A-k>', function() vim.treesitter.select('parent', 1) end)
 vim.keymap.set('x', '<A-j>', function() vim.treesitter.select('child', 1) end)
 
