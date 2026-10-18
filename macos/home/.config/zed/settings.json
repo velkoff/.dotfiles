@@ -1,5 +1,5 @@
 {
-    "cli_default_open_behavior": "new_window",
+    "cli_default_open_behavior": "existing_window",
     "icon_theme": {
         "mode": "dark",
         "light": "Zed (Default)",
@@ -19,18 +19,19 @@
     },
     "cursor_shape": "hollow",
     "theme": {
-        "mode": "dark",
-        "light": "Zen Light",
-        "dark": "Ayu Mirage"
+        "mode": "light",
+        "light": "Ayu Light",
+        "dark": "Gruvbox Dark"
     },
     "base_keymap": "VSCode",
     // "base_keymap": "JetBrains",
     "vim_mode": true,
     "relative_line_numbers": "enabled",
-    "buffer_font_family": "Iosevka",
+    "buffer_font_family": ".ZedMono", // Bundled (default)
+    // "buffer_font_family": "Iosevka",
+    // "buffer_font_family": "PragmataPro Liga",
     // "buffer_font_family": "iA Writer Mono S",
     // "buffer_font_family": "Dank Mono",
-    // "buffer_font_family": "PragmataPro Liga",
     // "buffer_font_family": "mononoki",
     "text_rendering_mode": "grayscale",
     "buffer_font_size": 14,
@@ -53,7 +54,7 @@
             "indent_list_on_tab": true,
             "soft_wrap": "bounded",
             "preferred_line_length": 120,
-            "wrap_guides": [64, 72, 120],
+            "wrap_guides": [64, 72, 120]
         }
     }
 }
