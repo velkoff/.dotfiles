@@ -20,6 +20,10 @@ set background=dark
 set splitright
 set splitbelow
 set colorcolumn=+1
+set list
+set listchars=tab:»·,trail:·,space:·
+set undofile
+set updatetime=100
 
 filetype plugin indent on
 
@@ -31,10 +35,11 @@ call plug#begin()
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
     Plug 'nvim-mini/mini.pairs'
+    Plug 'RRethy/vim-illuminate'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-sleuth'
     Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'petertriho/nvim-scrollbar'
+    Plug 'petertriho/nvim-scrollbar', { 'branch': 'refactor/v2' }
 
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'romgrk/barbar.nvim'
@@ -52,7 +57,6 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
     Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
     Plug 'nvim-treesitter/nvim-treesitter-context' 
-
     Plug 'windwp/nvim-ts-autotag' 
 
     Plug 'phha/zenburn.nvim'
@@ -61,6 +65,8 @@ call plug#begin()
     Plug 'zenbones-theme/zenbones.nvim'
     Plug 'shatur/neovim-ayu'
     Plug 'nickkadutskyi/jb.nvim'
+    Plug 'Mofiqul/dracula.nvim'
+    Plug 'oneslash/helix-nvim'
 call plug#end()
 
 " colorscheme zenburn
@@ -68,14 +74,15 @@ call plug#end()
 " colorscheme rose-pine-dawn
 " colorscheme rose-pine-moon
 " colorscheme zenbones
- "colorscheme zenwritten
- "colorscheme zenburned
-" colorscheme forestbones
 " colorscheme zenwritten
+" colorscheme zenburned
+" colorscheme forestbones
 " colorscheme jb
+colorscheme dracula
+" colorscheme helix
 
-autocmd ColorScheme ayu-mirage highlight LineNr guifg=#555f72
-colorscheme ayu-mirage
+" autocmd ColorScheme ayu-mirage highlight LineNr guifg=#555f72
+" colorscheme ayu-mirage
 
 let mapleader = "\<Space>"
 
@@ -108,6 +115,7 @@ xnoremap H _
 nnoremap L $
 xnoremap L $
 nnoremap M %
+xnoremap M %
 
 " d/x/r using the black hole register
 nnoremap x "_x
@@ -127,15 +135,17 @@ xnoremap <S-Tab> <gv
  xnoremap <A-l> J
 
 " Telescope
-nnoremap <leader>sf <cmd>Telescope find_files<cr>
+nnoremap <leader>sf <cmd>Telescope find_files hidden=true<cr>
 nnoremap <leader>sg <cmd>Telescope live_grep<cr>
+nnoremap <leader>sm <cmd>Telescope marks<cr>
+nnoremap <leader>sh <cmd>Telescope help_tags<cr>
 nnoremap <leader>O <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
 nnoremap <leader>o <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <leader><leader> <cmd>Telescope buffers<cr>
-nnoremap <leader>sh <cmd>Telescope help_tags<cr>
 
 " NERDTree
 nnoremap <leader>e :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " barbar
 set switchbuf=usetab
@@ -146,7 +156,20 @@ nnoremap <silent> <A-.> <Cmd>BufferNext<CR>
 nnoremap <silent> <A-S-,> <Cmd>BufferMovePrevious<CR>
 nnoremap <silent> <A-S-.> <Cmd>BufferMoveNext<CR>
 
-au TextYankPost * silent! lua vim.highlight.on_yank()
+" Highlight yank
+au TextYankPost * silent! lua vim.hl.on_yank()
+
+" vim-illuminate: use the current theme's Visual group instead of the 
+" default underline
+augroup illuminate_hl
+    autocmd!
+    autocmd ColorScheme,VimEnter * hi! link IlluminatedWordText Visual
+    autocmd ColorScheme,VimEnter * hi! link IlluminatedWordRead Visual
+    autocmd ColorScheme,VimEnter * hi! link IlluminatedWordWrite Visual
+augroup END
+
+" Delete all marks, excl. special marks
+command! Delmarks delmarks! | delmarks A-Z0-9 | wshada!
 
 " -------------------------------------------------------------------------- "
  
@@ -164,11 +187,18 @@ require('telescope').setup{
 
 require('telescope').load_extension('fzf')
 require('mini.pairs').setup()
-require("scrollbar").setup({
-    handle = { text = " ", blend = 50, color = 'yellow' },
-    marks = { Cursor = { text = " " } }
+require('illuminate').configure({
+    providers = { 'lsp', 'treesitter', 'regex' },
+    filetypes_denylist = { 'markdown' }
 })
-require("ibl").setup({
+
+require('scrollbar').setup({
+    exclude = { filetypes = { nerdtree = true } },
+    providers = { gitsigns = false, marks = true },
+    scrollbar = { preset = "zed" }
+})
+
+require('ibl').setup({
     indent = { char = "│", highlight = "IblIndent" },
     scope = { enabled = false }
 })
