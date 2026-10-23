@@ -37,10 +37,11 @@ call plug#begin()
     Plug 'nvim-mini/mini.pairs'
     Plug 'RRethy/vim-illuminate'
     Plug 'tpope/vim-surround'
+    Plug 'mg979/vim-visual-multi'
     Plug 'tpope/vim-sleuth'
     Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'petertriho/nvim-scrollbar', { 'branch': 'refactor/v2' }
 
+    Plug 'petertriho/nvim-scrollbar', { 'branch': 'refactor/v2' }
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'romgrk/barbar.nvim'
 
@@ -85,6 +86,9 @@ colorscheme dracula
 " colorscheme ayu-mirage
 
 let mapleader = "\<Space>"
+
+" vim-visual-multi
+let g:VM_maps = {'Find Under': '<A-d>', 'Find Subword Under': '<A-d>'}
 
 " Center cursor when moving 1/2 page up/down
 nnoremap <C-u> <C-u>zz
